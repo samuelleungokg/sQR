@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.history-item').forEach(item => {
         item.addEventListener('click', async () => {
           const content = decodeURIComponent(item.dataset.content);
-          const type = item.dataset.type;
+          const type = item.dataset.type.toLowerCase();
           
           try {
             // Copy to clipboard
@@ -115,12 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Get the current active tab
             const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
             if (tab) {
-              // Show toast in content script
-              chrome.tabs.sendMessage(tab.id, {
-                type: 'SHOW_TOAST',
-                message: '✅ Copied to clipboard!',
-                toastType: 'success'
-              });
+              // Only show toast for text items
+              if (type === 'text') {
+                chrome.tabs.sendMessage(tab.id, {
+                  type: 'SHOW_TOAST',
+                  message: '✅ Copied to clipboard!',
+                  toastType: 'success'
+                });
+              }
 
               // Handle special types
               if (type === 'url') {
