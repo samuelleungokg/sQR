@@ -24,7 +24,7 @@ A Chrome extension that automatically scans QR codes on web pages and allows you
 
 ### Step 2: Load the Extension
 1. Click **"Load unpacked"** button
-2. Navigate to and select the `oneClickQr` folder
+2. Navigate to and select the `sQR` folder
 3. The extension should now appear in your extensions list
 
 ### Step 3: Pin the Extension (Optional)
@@ -110,7 +110,7 @@ A Chrome extension that automatically scans QR codes on web pages and allows you
 
 ### File Structure
 ```
-oneClickQr/
+sQR/
 ├── manifest.json          # Extension configuration
 ├── content_script.js      # Scans pages for QR codes
 ├── background.js          # Handles QR code actions
