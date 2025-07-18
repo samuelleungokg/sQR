@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>sQR - Test Page</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin: 0 0 24px 0;
+      color: #333;
+      font-size: 24px;
+    }
+    .test-section {
+      margin-bottom: 32px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .test-section h2 {
+      margin: 0 0 16px 0;
+      color: #444;
+      font-size: 18px;
+    }
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .qr-item {
+      text-align: center;
+      padding: 16px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .qr-item img {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 12px;
+    }
+    .qr-item p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+    .qr-item .type {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .qr-item .type.url { 
+      background: #e3f2fd;
+      color: #1976D2;
+    }
+    .qr-item .type.email {
+      background: #e8f5e9;
+      color: #388E3C;
+    }
+    .qr-item .type.phone {
+      background: #fff3e0;
+      color: #F57C00;
+    }
+    .qr-item .type.text {
+      background: #f3e5f5;
+      color: #7B1FA2;
+    }
+    .instructions {
+      margin-bottom: 24px;
+      padding: 16px;
+      background: #e3f2fd;
+      border-radius: 8px;
+      color: #1976D2;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 sQR - Test Page</h1>
+
+    <div class="instructions">
+      <strong>Instructions:</strong>
+      <ul>
+        <li>Use this page to test different QR code scanning scenarios</li>
+        <li>Each QR code represents a different content type</li>
+        <li>Try scanning multiple QR codes at once</li>
+        <li>Check the history tab after scanning</li>
+      </ul>
+    </div>
+
+    <div class="test-section">
+      <h2>Single QR Codes</h2>
+      <div class="qr-grid">
+        <div class="qr-item">
+          <span class="type url">URL</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com" alt="URL QR Code">
+          <p>https://www.google.com</p>
+        </div>
+        <div class="qr-item">
+          <span class="type email">Email</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:test@example.com" alt="Email QR Code">
+          <p>test@example.com</p>
+        </div>
+        <div class="qr-item">
+          <span class="type phone">Phone</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+1234567890" alt="Phone QR Code">
+          <p>+1234567890</p>
+        </div>
+        <div class="qr-item">
+          <span class="type text">Text</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Hello World!" alt="Text QR Code">
+          <p>Hello World!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Multiple QR Codes</h2>
+      <div class="qr-grid">
+        <div class="qr-item">
+          <span class="type url">Multiple URLs</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.github.com" alt="Multiple URLs QR Code" style="margin-right: 10px;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.twitter.com" alt="Multiple URLs QR Code">
+          <p>github.com & twitter.com</p>
+        </div>
+        <div class="qr-item">
+          <span class="type text">Mixed Content</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Hello!" alt="Mixed Content QR Code" style="margin-right: 10px;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+1987654321" alt="Mixed Content QR Code">
+          <p>Text & Phone Number</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Special Cases</h2>
+      <div class="qr-grid">
+        <div class="qr-item">
+          <span class="type text">Long Text</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=This is a very long text that should test the handling of long content in the extension. It should be properly displayed in the history and properly copied to clipboard." alt="Long Text QR Code">
+          <p>Long text content</p>
+        </div>
+        <div class="qr-item">
+          <span class="type url">Complex URL</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com/path?param1=value1&param2=value2#section" alt="Complex URL QR Code">
+          <p>URL with parameters</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
