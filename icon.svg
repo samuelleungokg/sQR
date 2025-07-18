@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- QR Code (simplified) -->
+  <g transform="translate(32, 32) scale(0.6)">
+    <!-- QR Code blocks -->
+    <rect x="0" y="0" width="20" height="20" fill="#333333"/>
+    <rect x="40" y="0" width="20" height="20" fill="#333333"/>
+    <rect x="80" y="0" width="20" height="20" fill="#333333"/>
+    <rect x="0" y="40" width="20" height="20" fill="#333333"/>
+    <rect x="80" y="40" width="20" height="20" fill="#333333"/>
+    <rect x="0" y="80" width="20" height="20" fill="#333333"/>
+    <rect x="40" y="80" width="20" height="20" fill="#333333"/>
+    <rect x="80" y="80" width="20" height="20" fill="#333333"/>
+  </g>
+  
+  <!-- Magnifying Glass -->
+  <g transform="translate(64, 64) scale(0.9)">
+    <!-- Glass Circle -->
+    <circle cx="0" cy="0" r="32" stroke="#333333" stroke-width="8" fill="none"/>
+    <!-- Handle -->
+    <line x1="22.62" y1="22.62" x2="45" y2="45" stroke="#333333" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg> 

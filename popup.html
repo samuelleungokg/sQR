@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>sQR Scanner</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔍 sQR</h1>
+    </div>
+    
+    <div class="actions">
+      <button id="areaScanBtn" class="btn btn-primary">
+        <span>🎯</span>
+        <span>Select Area to Scan</span>
+      </button>
+    </div>
+    
+    <div class="status" id="status">
+      <p>💡 Click and drag to select an area containing QR codes</p>
+    </div>
+    
+    <div class="results" id="results">
+      <!-- QR code results will be displayed here -->
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 

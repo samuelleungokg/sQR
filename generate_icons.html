@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate One Click QR Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .icon-preview canvas {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .download-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .download-btn:hover {
+            background: #45a049;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .description {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 One Click QR - Icon Generator</h1>
+        
+        <div class="description">
+            <strong>Design:</strong> Eye symbol in the center with QR code pattern background
+            <br><strong>Purpose:</strong> Create icons for the Chrome extension in multiple sizes
+        </div>
+        
+        <div id="icons"></div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+            <strong>Instructions:</strong>
+            <ol>
+                <li>Click the download buttons to save each icon size</li>
+                <li>Save them in the <code>icons/</code> folder with names: icon16.png, icon32.png, icon48.png, icon128.png</li>
+                <li>The manifest.json will be updated automatically</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function createIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Background - White
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, size, size);
+            
+            // QR Code pattern background
+            ctx.fillStyle = '#e8f5e9';
+            const blockSize = Math.max(1, Math.floor(size / 16));
+            
+            // Simple QR-like pattern
+            const pattern = [
+                "1111000010001111",
+                "1001010010101001", 
+                "1011010010101101",
+                "1011010010101101",
+                "1001010010101001",
+                "1111000010001111",
+                "0000000000000000",
+                "0010101110101010",
+                "1101010001010111",
+                "0010101110101010",
+                "1101010001010111",
+                "0010101110101010",
+                "0000000000000000",
+                "1111000010001111",
+                "1001010010101001",
+                "1111000010001111"
+            ];
+            
+            // Draw QR pattern background
+            for (let y = 0; y < pattern.length; y++) {
+                for (let x = 0; x < pattern[y].length; x++) {
+                    if (pattern[y][x] === '1') {
+                        ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+                    }
+                }
+            }
+            
+            // Main green background circle
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const mainRadius = size * 0.35;
+            
+            ctx.fillStyle = '#4CAF50';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, mainRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // White circle for eye background
+            const eyeBackgroundRadius = size * 0.28;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, eyeBackgroundRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Eye outline
+            const eyeWidth = size * 0.4;
+            const eyeHeight = size * 0.25;
+            
+            ctx.strokeStyle = '#333333';
+            ctx.lineWidth = Math.max(1, size / 32);
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, eyeWidth / 2, eyeHeight / 2, 0, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // Eye pupil (iris)
+            const irisRadius = size * 0.15;
+            ctx.fillStyle = '#2196F3';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, irisRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Eye pupil center
+            const pupilRadius = size * 0.08;
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, pupilRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Light reflection in eye
+            const reflectionRadius = size * 0.03;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(centerX - size * 0.02, centerY - size * 0.02, reflectionRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Border
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = Math.max(1, size / 64);
+            ctx.beginPath();
+            ctx.roundRect(1, 1, size - 2, size - 2, size / 8);
+            ctx.stroke();
+            
+            return canvas;
+        }
+        
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Generate icons
+        const sizes = [16, 32, 48, 128];
+        const iconsDiv = document.getElementById('icons');
+        
+        sizes.forEach(size => {
+            const canvas = createIcon(size);
+            
+            const div = document.createElement('div');
+            div.className = 'icon-preview';
+            
+            const label = document.createElement('div');
+            label.textContent = `${size}x${size}`;
+            label.style.fontWeight = 'bold';
+            label.style.marginBottom = '8px';
+            
+            const downloadBtn = document.createElement('button');
+            downloadBtn.className = 'download-btn';
+            downloadBtn.textContent = `Download icon${size}.png`;
+            downloadBtn.onclick = () => downloadCanvas(canvas, `icon${size}.png`);
+            
+            div.appendChild(label);
+            div.appendChild(canvas);
+            div.appendChild(document.createElement('br'));
+            div.appendChild(downloadBtn);
+            
+            iconsDiv.appendChild(div);
+        });
+        
+        console.log('🎨 Icon generator ready! Click download buttons to save icons.');
+    </script>
+</body>
+</html> 

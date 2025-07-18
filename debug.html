@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>sQR - Debug</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin: 0 0 24px 0;
+      color: #333;
+      font-size: 24px;
+    }
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .section h2 {
+      margin: 0 0 16px 0;
+      color: #444;
+      font-size: 18px;
+    }
+    .log-container {
+      background: #1e1e1e;
+      color: #fff;
+      padding: 16px;
+      border-radius: 6px;
+      font-family: monospace;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .log-entry {
+      margin: 4px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .log-entry.error { color: #ff6b6b; }
+    .log-entry.success { color: #51cf66; }
+    .log-entry.info { color: #339af0; }
+    .log-entry.warning { color: #ffd43b; }
+    .status {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .status-item {
+      flex: 1;
+      min-width: 200px;
+      padding: 16px;
+      background: #e9ecef;
+      border-radius: 6px;
+    }
+    .status-item h3 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #666;
+    }
+    .status-item p {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: #339af0;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button:hover {
+      background: #228be6;
+    }
+    button.clear {
+      background: #868e96;
+    }
+    button.clear:hover {
+      background: #495057;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 sQR - Debug Console</h1>
+    
+    <div class="section">
+      <h2>Extension Status</h2>
+      <div class="status">
+        <div class="status-item">
+          <h3>Storage Usage</h3>
+          <p id="storage-usage">Checking...</p>
+        </div>
+        <div class="status-item">
+          <h3>History Count</h3>
+          <p id="history-count">Loading...</p>
+        </div>
+        <div class="status-item">
+          <h3>Last Scan</h3>
+          <p id="last-scan">None</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Debug Log</h2>
+      <div class="controls">
+        <button onclick="clearLog()">Clear Log</button>
+        <button onclick="exportLog()">Export Log</button>
+        <button onclick="clearHistory()">Clear History</button>
+      </div>
+      <div class="log-container" id="log">
+        <!-- Log entries will be added here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize debug console
+    document.addEventListener('DOMContentLoaded', () => {
+      updateStatus();
+      addLogEntry('Debug console initialized', 'info');
+      
+      // Listen for extension messages
+      chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if (message.action === 'qrFound') {
+          addLogEntry(`QR Code found: ${message.type} - ${message.content}`, 'success');
+          updateStatus();
+        }
+      });
+    });
+
+    function updateStatus() {
+      // Get storage usage
+      chrome.storage.local.getBytesInUse(null, (bytes) => {
+        document.getElementById('storage-usage').textContent = 
+          `${(bytes / 1024).toFixed(2)} KB`;
+      });
+
+      // Get history count
+      chrome.storage.local.get(['qrHistory'], (result) => {
+        const history = result.qrHistory || [];
+        document.getElementById('history-count').textContent = 
+          `${history.length} items`;
+        
+        if (history.length > 0) {
+          const lastScan = new Date(history[0].timestamp).toLocaleString();
+          document.getElementById('last-scan').textContent = lastScan;
+        }
+      });
+    }
+
+    function addLogEntry(message, type = 'info') {
+      const log = document.getElementById('log');
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      log.insertBefore(entry, log.firstChild);
+    }
+
+    function clearLog() {
+      document.getElementById('log').innerHTML = '';
+      addLogEntry('Log cleared', 'info');
+    }
+
+    function exportLog() {
+      const log = document.getElementById('log').innerText;
+      const blob = new Blob([log], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `sqr-debug-log-${new Date().toISOString()}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+      addLogEntry('Log exported', 'info');
+    }
+
+    function clearHistory() {
+      chrome.storage.local.set({ qrHistory: [] }, () => {
+        addLogEntry('History cleared', 'warning');
+        updateStatus();
+      });
+    }
+  </script>
+</body>
+</html> 

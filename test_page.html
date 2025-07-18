@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Test Page - One Click QR Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .qr-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .qr-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .qr-code {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .qr-code img {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 10px 0 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+        }
+        .instructions h2 {
+            margin-top: 0;
+            color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 One Click QR - Test Page</h1>
+    
+    <div class="instructions">
+        <h2>How to Test the New Popup Feature</h2>
+        <ol>
+            <li>Make sure the One Click QR extension is loaded in Chrome</li>
+            <li>QR codes below should automatically get green borders when detected</li>
+            <li><strong>Click on any QR code to show/hide a popup with its content</strong></li>
+            <li>Popups show up to 20 characters of content</li>
+            <li>URLs in popups are clickable links</li>
+            <li>Use the ✕ button to close popups</li>
+            <li>Click outside popups to close them</li>
+        </ol>
+    </div>
+
+    <div class="qr-section">
+        <h3>Website URLs</h3>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com" alt="Google QR Code">
+            <p>Google.com</p>
+        </div>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.github.com" alt="GitHub QR Code">
+            <p>GitHub.com</p>
+        </div>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.youtube.com" alt="YouTube QR Code">
+            <p>YouTube.com</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Contact Information</h3>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:test@example.com" alt="Email QR Code">
+            <p>Email: test@example.com</p>
+        </div>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel:+1234567890" alt="Phone QR Code">
+            <p>Phone: +1234567890</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Text Content</h3>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Hello%20World%20from%20One%20Click%20QR!" alt="Text QR Code">
+            <p>Text: "Hello World from One Click QR!"</p>
+        </div>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=This%20is%20a%20test%20QR%20code%20for%20the%20Chrome%20extension" alt="Long Text QR Code">
+            <p>Text: "This is a test QR code for the Chrome extension"</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>WiFi Network</h3>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=WIFI:T:WPA;S:TestNetwork;P:password123;;" alt="WiFi QR Code">
+            <p>WiFi: TestNetwork (password123)</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Canvas QR Code (Generated via JavaScript)</h3>
+        
+        <div class="qr-code">
+            <canvas id="canvasQR" width="150" height="150" style="border: 1px solid #ccc; border-radius: 4px;"></canvas>
+            <p>Canvas: "https://www.stackoverflow.com"</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Background Image QR Code</h3>
+        
+        <div class="qr-code">
+            <div id="bgQR" style="width: 150px; height: 150px; background-image: url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.wikipedia.org'); background-size: cover; border: 1px solid #ccc; border-radius: 4px;"></div>
+            <p>Background: "https://www.wikipedia.org"</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Lazy Loaded Images</h3>
+        
+        <div class="qr-code">
+            <img loading="lazy" data-src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.twitter.com" alt="Lazy QR Code" style="border: 1px solid #ccc; border-radius: 4px; width: 150px; height: 150px; background: #f0f0f0;">
+            <p>Lazy Loading: "https://www.twitter.com"</p>
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <h3>Complex Container QR Codes</h3>
+        
+        <div class="qr-code">
+            <div style="position: relative; width: 150px; height: 150px; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); border: 1px solid #ccc; border-radius: 4px; overflow: hidden;">
+                <div style="position: absolute; top: 10px; left: 10px; width: 130px; height: 130px; background: white; border-radius: 4px;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://www.instagram.com" alt="Complex Container QR" style="width: 100%; height: 100%;">
+                </div>
+                <div style="position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 4px; font-size: 10px; border-radius: 2px;">QR</div>
+            </div>
+            <p>Complex Container: "https://www.instagram.com"</p>
+        </div>
+        
+        <div class="qr-code">
+            <div id="shadowQR" style="width: 150px; height: 150px; border: 1px solid #ccc; border-radius: 4px;">
+                <!-- QR code will be added via Shadow DOM -->
+            </div>
+            <p>Shadow DOM: "https://www.linkedin.com"</p>
+        </div>
+    </div>
+
+    <div class="qr-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; color: white;">
+        <h3 style="color: white;">Hard-to-Detect QR Codes</h3>
+        <p style="color: #e0e0e0; font-size: 14px;">These QR codes are embedded in complex layouts and may not be detected by normal element scanning. Use the <strong>📸 Screen Capture Scan</strong> button to detect them!</p>
+        
+        <div class="qr-code">
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                <div style="text-align: center; margin-bottom: 10px; font-weight: bold; color: #333;">Scan Me!</div>
+                <div style="background: url('https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.tiktok.com') center/contain no-repeat; width: 120px; height: 120px; margin: 0 auto;"></div>
+                <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #666;">Embedded QR</div>
+            </div>
+            <p>Complex Styling: "https://www.tiktok.com"</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+        <h3>Expected Behavior:</h3>
+        <ul>
+            <li>✅ QR codes should get green borders automatically</li>
+            <li>✅ Clicking QR codes should show/hide popup next to them</li>
+            <li>✅ Popups should show truncated content (20 chars max)</li>
+            <li>✅ URLs in popups should be clickable links</li>
+            <li>✅ Popups should have close buttons (✕)</li>
+            <li>✅ Extension badge should show a dot when QR codes are found</li>
+            <li>✅ Non-URL content should be searchable when clicked</li>
+            <li>✅ Only one popup should be visible at a time</li>
+            <li>🆕 <strong>Canvas QR codes should be detected</strong></li>
+            <li>🆕 <strong>Background image QR codes should be detected</strong></li>
+            <li>🆕 <strong>Lazy-loaded images should be detected when they load</strong></li>
+            <li>🆕 <strong>Dynamically added QR codes should be detected</strong></li>
+            <li>🆕 <strong>Console should show detailed scanning logs</strong></li>
+            <li>🎯 <strong>📸 Screen Capture should detect QR codes in complex containers</strong></li>
+            <li>🎯 <strong>📸 Screen Capture should find Shadow DOM QR codes</strong></li>
+            <li>🎯 <strong>📸 Screen Capture should detect CSS background QR codes</strong></li>
+            <li>🎯 <strong>🎯 Select Area should let you draw selection boxes around QR codes</strong></li>
+            <li>🎯 <strong>🎯 Selected areas should be captured and scanned precisely</strong></li>
+        </ul>
+        
+        <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 4px;">
+                         <strong>🐛 Testing Guide:</strong>
+             <ul style="margin: 5px 0; font-size: 13px;">
+                 <li><strong>🔍 Page Elements</strong>: Fast scan of regular images, canvas, SVG, and backgrounds</li>
+                 <li><strong>📸 Screen Capture</strong>: Universal scan that captures the visible screen and detects ANY QR codes</li>
+                 <li><strong>🎯 Select Area</strong>: Click and drag to select specific areas - perfect for targeting individual QR codes</li>
+                 <li>Open Chrome DevTools (F12) → Console tab to see detailed scanning logs</li>
+                 <li>Use Select Area when you want to focus on a specific QR code or avoid false positives</li>
+                 <li>Press Escape or click Cancel to exit area selection mode</li>
+             </ul>
+        </div>
+    </div>
+
+    <script>
+        // Generate canvas QR code
+        function drawCanvasQR() {
+            const canvas = document.getElementById('canvasQR');
+            const ctx = canvas.getContext('2d');
+            
+            // Create a simple QR code pattern
+            ctx.fillStyle = '#000000';
+            const blockSize = 5;
+            const pattern = [
+                "111010001110101011101000111",
+                "100010101000101010001010001",
+                "101110101110101011101110101",
+                "101110101110101011101110101",
+                "101110101110101011101110101",
+                "000000000000000000000000000",
+                "111111100000111111100000000",
+                "000000001011100000001010101",
+                "101010101110101010101110101",
+                "010101010001010101010001010",
+                "101110101110101010101110101",
+                "010001010001010101010001010",
+                "101110101110101010101110101",
+                "000000001010100000001010101",
+                "111111101110111111101110111",
+                "000000000000000000000000000",
+                "101110101110101011101110101",
+                "010001010001010100010001010",
+                "101110101110101011101110101",
+                "010001010001010100010001010",
+                "101110101110101011101110101",
+                "010001010001010100010001010",
+                "101110101110101011101110101",
+                "000000000000000000000000000",
+                "111010001110101011101000111",
+                "100010101000101010001010001",
+                "111010001110101011101000111"
+            ];
+            
+            // Clear canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw pattern
+            ctx.fillStyle = '#000000';
+            for (let y = 0; y < pattern.length; y++) {
+                for (let x = 0; x < pattern[y].length; x++) {
+                    if (pattern[y][x] === '1') {
+                        ctx.fillRect(x * blockSize + 10, y * blockSize + 10, blockSize, blockSize);
+                    }
+                }
+            }
+        }
+        
+        // Simulate lazy loading
+        function setupLazyLoading() {
+            const lazyImg = document.querySelector('img[loading="lazy"]');
+            if (lazyImg) {
+                // Simulate intersection observer behavior
+                setTimeout(() => {
+                    const src = lazyImg.getAttribute('data-src');
+                    if (src) {
+                        lazyImg.src = src;
+                        lazyImg.removeAttribute('data-src');
+                        console.log('Lazy image loaded:', src);
+                    }
+                }, 2000);
+            }
+        }
+        
+        // Add some dynamic content to test the mutation observer
+        function addDynamicContent() {
+            setTimeout(() => {
+                const section = document.createElement('div');
+                section.className = 'qr-section';
+                section.innerHTML = `
+                    <h3>Dynamically Added QR Code</h3>
+                    <div class="qr-code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.reddit.com" alt="Reddit QR Code">
+                        <p>Dynamically loaded: Reddit.com</p>
+                    </div>
+                `;
+                document.body.appendChild(section);
+                console.log('Dynamic QR code added');
+            }, 5000);
+        }
+        
+        // Create Shadow DOM QR code
+        function createShadowQR() {
+            const shadowHost = document.getElementById('shadowQR');
+            if (shadowHost && shadowHost.attachShadow) {
+                const shadow = shadowHost.attachShadow({mode: 'open'});
+                shadow.innerHTML = `
+                    <style>
+                        .shadow-qr {
+                            width: 100%;
+                            height: 100%;
+                            background: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .shadow-qr img {
+                            max-width: 90%;
+                            max-height: 90%;
+                        }
+                    </style>
+                    <div class="shadow-qr">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=135x135&data=https://www.linkedin.com" alt="Shadow QR">
+                    </div>
+                `;
+                console.log('📦 Shadow DOM QR code created');
+            }
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Test page loaded, initializing...');
+            drawCanvasQR();
+            setupLazyLoading();
+            createShadowQR();
+            addDynamicContent();
+        });
+    </script>
+</body>
+</html> 

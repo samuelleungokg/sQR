@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Area Scan - One Click QR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .qr-test {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .qr-test img {
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .debug-info {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .console-tip {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #ff9800;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🐛 Area Scan Debug Page</h1>
+        
+        <div class="debug-info">
+            <h2>📋 How to Debug Area Scan:</h2>
+            <ol>
+                <li><strong>Open Chrome DevTools</strong> (F12 → Console tab)</li>
+                <li><strong>Click the extension icon</strong> and select "🎯 Select Area Scan"</li>
+                <li><strong>Watch console logs</strong> for messages starting with 🎯, 📸, ✅, ❌</li>
+                <li><strong>Draw selection</strong> around a QR code below</li>
+                <li><strong>Check what happens</strong> - popup should appear or toast should show</li>
+            </ol>
+        </div>
+        
+        <h2>🎯 Test QR Codes for Area Selection:</h2>
+        
+        <div class="qr-test">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.google.com" alt="Google QR">
+            <p><strong>Large QR Code</strong><br>"https://www.google.com"</p>
+        </div>
+        
+        <div class="qr-test">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Hello%20World" alt="Text QR">
+            <p><strong>Medium QR Code</strong><br>"Hello World"</p>
+        </div>
+        
+        <div class="qr-test">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=Test123" alt="Small QR">
+            <p><strong>Small QR Code</strong><br>"Test123"</p>
+        </div>
+        
+        <div class="console-tip">
+            <strong>🔍 Console Log Guide:</strong>
+            <ul>
+                <li><code>🎯 Starting area selection mode...</code> - Area selection activated</li>
+                <li><code>🎯 Area selected: {x, y, width, height}</code> - Selection coordinates</li>
+                <li><code>📸 Capturing visible tab...</code> - Screen capture started</li>
+                <li><code>✅ Screen captured, cropping...</code> - Capture successful</li>
+                <li><code>🎉 QR code found: [data]</code> - QR detected!</li>
+                <li><code>❌ No QR code detected</code> - Nothing found</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+            <h3>🔧 Expected Results:</h3>
+            <p><strong>✅ When QR code is selected:</strong></p>
+            <ul>
+                <li>Toast: "✅ QR code detected!"</li>
+                <li>Popup appears with QR content after 1.5 seconds</li>
+                <li>Console shows: "🎉 QR code found: [data]"</li>
+            </ul>
+            
+            <p><strong>❌ When no QR code in selection:</strong></p>
+            <ul>
+                <li>Toast: "❌ No QR code detected in selected area"</li>
+                <li>Console shows: "🎯 No QR codes found in selected area"</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

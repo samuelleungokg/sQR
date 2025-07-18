@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Area Selection Test - QR Extension</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .qr-item {
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        
+        .qr-item:hover {
+            border-color: #FF9800;
+        }
+        
+        .qr-item img {
+            max-width: 200px;
+            margin: 10px 0;
+        }
+        
+        .qr-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .qr-content {
+            font-size: 12px;
+            color: #666;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+        }
+        
+        .step-number {
+            background: #2196F3;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .console-logs {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        
+        .expected-result {
+            background: #e8f5e8;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 Area Selection Test</h1>
+        <p>Test the "🎯 Select Area Scan" functionality with clear QR codes</p>
+    </div>
+
+    <div class="test-section">
+        <div class="instructions">
+            <h2>📋 Testing Instructions</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div><strong>Open Chrome DevTools</strong> (Press F12 → Console tab)</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div><strong>Click the extension icon</strong> and select <strong>"🎯 Select Area Scan"</strong></div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div><strong>Draw a selection box</strong> around any QR code below</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div><strong>Watch the console logs</strong> and see the results!</div>
+            </div>
+        </div>
+
+        <h2>🎯 QR Codes for Testing</h2>
+        <div class="qr-grid">
+            <div class="qr-item">
+                <div class="qr-label">📱 Website URL</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.google.com" alt="Google QR">
+                <div class="qr-content">https://www.google.com</div>
+            </div>
+            
+            <div class="qr-item">
+                <div class="qr-label">📧 Email Address</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mailto:test@example.com" alt="Email QR">
+                <div class="qr-content">mailto:test@example.com</div>
+            </div>
+            
+            <div class="qr-item">
+                <div class="qr-label">📞 Phone Number</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=tel:+1234567890" alt="Phone QR">
+                <div class="qr-content">tel:+1234567890</div>
+            </div>
+            
+            <div class="qr-item">
+                <div class="qr-label">💬 Plain Text</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Hello%20World%20QR%20Test" alt="Text QR">
+                <div class="qr-content">Hello World QR Test</div>
+            </div>
+            
+            <div class="qr-item">
+                <div class="qr-label">🔗 Social Media</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://twitter.com" alt="Twitter QR">
+                <div class="qr-content">https://twitter.com</div>
+            </div>
+            
+            <div class="qr-item">
+                <div class="qr-label">📍 Long URL</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.example.com/very/long/path/with/parameters?param1=value1&param2=value2" alt="Long URL QR">
+                <div class="qr-content">https://www.example.com/very/long/path/with/parameters?param1=value1&param2=value2</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>✅ Expected Results</h2>
+        
+        <div class="expected-result">
+            <h3 class="success">🎉 When QR Code is Selected:</h3>
+            <ul>
+                <li><strong>Toast notification:</strong> "✅ QR code detected!"</li>
+                <li><strong>Popup appears:</strong> Shows QR content with clickable links (for URLs)</li>
+                <li><strong>Console shows:</strong> "🎉 QR code found in selected area: [content]"</li>
+                <li><strong>Green border:</strong> Briefly visible around the selected area</li>
+            </ul>
+        </div>
+        
+        <div class="expected-result">
+            <h3 class="error">❌ When No QR Code in Selection:</h3>
+            <ul>
+                <li><strong>Toast notification:</strong> "❌ No QR code detected in selected area"</li>
+                <li><strong>Console shows:</strong> "🎯 No QR codes found in selected area"</li>
+                <li><strong>No popup:</strong> Nothing appears</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Console Log Reference</h2>
+        <div class="console-logs">
+🎯 Starting area selection mode...<br>
+🎯 Area selected: {x: 150, y: 300, width: 220, height: 240}<br>
+📸 Starting screen capture and QR analysis for selected area...<br>
+🎯 Starting area capture scan...<br>
+📸 Capturing visible tab for area scan...<br>
+✅ Screen captured, cropping to selected area...<br>
+🔧 Starting image crop with area: {x: 150, y: 300, width: 220, height: 240}<br>
+🖼️ Image loaded for cropping. Image size: 1920 x 1080<br>
+🎨 Canvas created: 220 x 240<br>
+✅ Image cropped successfully<br>
+✅ Image cropped, sending for QR analysis...<br>
+🎯 Analyzing area capture for QR codes...<br>
+📸 Image loaded for analysis, size: 220 x 240<br>
+🎯 Scanning 220x240 selected area...<br>
+<span class="success">🎉 QR code found in selected area: https://www.google.com</span><br>
+🎯 Creating virtual element for area QR at: {x: 150, y: 300, width: 220, height: 240}<br>
+🎯 Popup displayed with QR content: https://www.google.com<br>
+✅ Area scan completed! Found 1 QR code(s)<br>
+🎉 QR Code content: https://www.google.com
+        </div>
+        
+        <p style="margin-top: 15px; font-size: 14px; color: #666;">
+            <strong>Note:</strong> If you see <span class="error">"❌ Failed to crop area"</span>, reload the extension in chrome://extensions/
+        </p>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Tips for Testing</h2>
+        <ul>
+            <li><strong>Select precisely:</strong> Draw the selection box tightly around each QR code</li>
+            <li><strong>Avoid overlapping:</strong> Don't select multiple QR codes at once</li>
+            <li><strong>Test empty areas:</strong> Try selecting areas with no QR codes to see error handling</li>
+            <li><strong>Try different sizes:</strong> Test both large and small selection areas</li>
+            <li><strong>Check popup positioning:</strong> Make sure popups appear near the selected area</li>
+            <li><strong>Test URLs:</strong> Click on URL popups to verify they open correctly</li>
+        </ul>
+    </div>
+</body>
+</html> 
