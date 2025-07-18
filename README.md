@@ -1,4 +1,4 @@
-# One Click QR - Chrome Extension
+# sQR - Chrome Extension
 
 A Chrome extension that automatically scans QR codes on web pages and allows you to open the decoded URLs with one click.
 
