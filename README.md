@@ -2,6 +2,9 @@
 
 A Chrome extension that automatically scans QR codes on web pages and allows you to open the decoded URLs with one click.
 
+![20250718-183257](https://github.com/user-attachments/assets/d04c006c-e558-4d1f-a0b3-e5c952ba29df)
+
+
 ## Features
 
 - 🔍 **Comprehensive QR Detection**: Scans images, canvas elements, SVG graphics, and background images
