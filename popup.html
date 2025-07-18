@@ -11,19 +11,32 @@
       <h1>🔍 sQR</h1>
     </div>
     
-    <div class="actions">
-      <button id="areaScanBtn" class="btn btn-primary">
-        <span>🎯</span>
-        <span>Select Area to Scan</span>
-      </button>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="scan">Scan</button>
+      <button class="tab-btn" data-tab="history">History</button>
     </div>
-    
-    <div class="status" id="status">
-      <p>💡 Click and drag to select an area containing QR codes</p>
+
+    <div id="scan-tab" class="tab-content active">
+      <div class="actions">
+        <button id="areaScanBtn" class="btn btn-primary">
+          <span>🎯</span>
+          <span>Select Area to Scan</span>
+        </button>
+      </div>
+      
+      <div class="status" id="status">
+        <p>💡 Click and drag to select an area containing QR codes</p>
+      </div>
+      
+      <div class="results" id="results">
+        <!-- QR code results will be displayed here -->
+      </div>
     </div>
-    
-    <div class="results" id="results">
-      <!-- QR code results will be displayed here -->
+
+    <div id="history-tab" class="tab-content">
+      <div id="history-list" class="history-list">
+        <!-- History items will be loaded here -->
+      </div>
     </div>
   </div>
   
